@@ -1,0 +1,27 @@
+<configuration>
+
+    <!-- Appender ke File di Home User -->
+    <property name="USER_HOME" value="${user.home}" />
+
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>${USER_HOME}/PDF-Geek/application.log</file>
+        <append>false</append>
+        <encoder>
+                 <pattern>%d{HH:mm:ss} %-5level %class{0} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Appender ke Console (Opsional) -->
+<!--    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">-->
+<!--        <encoder>-->
+<!--            <pattern>%d{HH:mm:ss} [%thread] %-5level %C{1} - %msg%n</pattern>-->
+<!--        </encoder>-->
+<!--    </appender>-->
+
+    <!-- Root Logger -->
+    <root level="debug">
+        <appender-ref ref="FILE" />
+<!--        <appender-ref ref="CONSOLE" />-->
+    </root>
+
+</configuration>
