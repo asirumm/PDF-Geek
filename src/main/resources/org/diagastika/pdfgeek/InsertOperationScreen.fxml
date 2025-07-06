@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="720.0" minWidth="900.0" prefHeight="720.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.diagastika.pdfgeek.Controller.InsertController">
+   <children>
+      <HBox layoutX="2.0" layoutY="-1.0" minHeight="720.0" minWidth="900.0" prefHeight="720.0" prefWidth="900.0">
+         <children>
+            <ImageView fx:id="pdfViewImage" fitHeight="720.0" fitWidth="537.0" pickOnBounds="true" preserveRatio="true" />
+            <VBox prefHeight="600.0" prefWidth="373.0" styleClass="border" stylesheets="@style.css">
+               <children>
+                  <Label fx:id="pdfNameLabel" text="nama file" wrapText="true">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" top="20.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="pageInformationLabel" text="Halaman ke dari">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <HBox prefHeight="41.0" prefWidth="363.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#previousPageButtonOnClick" text="Previous page">
+                           <HBox.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#nextPageButtonOnClick" text="Next page">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="42.0" prefWidth="300.0">
+                     <children>
+                        <TextField fx:id="inputFindPageTextField" promptText="pergi ke halaman">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <Button mnemonicParsing="false" onAction="#findPageButtonOnClick" text="Cari">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <VBox prefHeight="362.0" prefWidth="363.0">
+                     <children>
+                        <Label text="Daftar file yang telah disisipkan">
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <ListView fx:id="filesInsertListView" prefHeight="200.0" prefWidth="200.0" />
+                        <Button mnemonicParsing="false" onAction="#insertFileButtonOnAction" text="Sisipkan file di halaman saat ini">
+                           <VBox.margin>
+                              <Insets left="10.0" top="10.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#cancelInsertButtonOnClick" style="-fx-background-color: e9524a;" text="Batalkan penyisipan file terakhir" textFill="WHITE">
+                           <VBox.margin>
+                              <Insets left="10.0" top="10.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#saveFileButtonOnAction" text="Simpan file">
+                           <VBox.margin>
+                              <Insets left="10.0" top="25.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <Pane prefHeight="108.0" prefWidth="363.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="5.0" text="Info">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="feedbackLabel" layoutX="11.0" layoutY="32.0" text="..." textFill="#294db9" wrapText="true">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Button mnemonicParsing="false" onAction="#backButtonOnClick" text="Back to home">
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</Pane>

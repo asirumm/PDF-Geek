@@ -5,18 +5,21 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import org.apache.pdfbox.multipdf.PDFMergerUtility;
 import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.rendering.PDFRenderer;
+import org.diagastika.pdfgeek.Data.InsertData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PdfServices {
     private final Logger logger = LoggerFactory.getLogger(getClass());
-    private PDDocument userPdf;
+    private PDDocument mainPdf;
     private PDFRenderer renderer;
     private String fileName;
     private File userFile;
@@ -31,8 +34,8 @@ public class PdfServices {
 
             logger.info("user file {}",file.toString());
 
-            this.userPdf = PDDocument.load(file);
-            renderer = new PDFRenderer(userPdf);
+            this.mainPdf = PDDocument.load(file);
+            renderer = new PDFRenderer(mainPdf);
 
         }catch (IOException e){
             logger.error("error when create instace PDDOCUMENT",e);
@@ -41,8 +44,20 @@ public class PdfServices {
 
     }
 
+    public void closePDDocument(){
+        try {
+            mainPdf.close();
+
+            logger.info("berhasil menutup PDDocument");
+
+        } catch (IOException e) {
+            logger.error("gagal menutup resources",e);
+            Platform.exit();
+        }
+    }
+
     public int getTotalPages(){
-        return userPdf.getNumberOfPages();
+        return mainPdf.getNumberOfPages();
     }
 
     public Image getPdfImage(int pageIndex) throws IOException {
@@ -60,26 +75,76 @@ public class PdfServices {
         logger.info("memulai proses hapus halaman");
 
             // Loop mundur supaya index tetap stabil saat menghapus
-            for (int i = userPdf.getNumberOfPages() - 1; i >= 0; i--) {
+            for (int i = mainPdf.getNumberOfPages() - 1; i >= 0; i--) {
                 if (pagesWantToDelete.contains(i)) {
 
-                    userPdf.removePage(i);
+                    mainPdf.removePage(i);
 
                     logger.debug("hapus halaman {}",i);
                 }
             }
 
         // Cek sisa halaman
-        if (userPdf.getNumberOfPages() == 0) {
+        if (mainPdf.getNumberOfPages() == 0) {
 
             logger.warn("Semua halaman dihapus, tidak menyimpan file kosong.");
             
         }else {
-            userPdf.save(fileName);
-
+            mainPdf.save(fileName);
         }
 
     }
+
+    public void insertFilesToMainPdf(List<InsertData> insertData,File wheresSave) throws IOException {
+        // ini dibuat agar tidak kena COSStream has been closed and cannot be read.
+        // kita harus menahannay sampai main pdf di save
+        ArrayList<PDDocument> listOfPDDocumentShouldClose = new ArrayList<>();
+
+        insertData.forEach(value->{
+            try {
+                logger.info("menyisipkan file {} ke halaman {}",value.getFile().getName(),value.getIndex());
+
+                PDDocument temp = insertPageToMainPdf(value.getFile(),value.getIndex());
+
+                listOfPDDocumentShouldClose.add(temp);
+
+            } catch (IOException e) {
+               throw new RuntimeException("gagal melakukan operasi sisipkan",e);
+            }
+        });
+
+        mainPdf.save(wheresSave);
+
+        listOfPDDocumentShouldClose.forEach(data->{
+            try {
+                data.close();
+            } catch (IOException e) {
+                logger.error("gagal menutup PDDocument",e);
+                Platform.exit();
+            }
+        });
+    }
+
+
+    private PDDocument insertPageToMainPdf(File fileToInsert, int whereToInsert) throws IOException {
+
+        PDDocument fileWantToInsert = PDDocument.load(fileToInsert);
+
+        int totalPagesToInsert = fileWantToInsert.getNumberOfPages();
+
+        for (int i = 0; i < totalPagesToInsert; i++) {
+            PDPage halamanSisip = fileWantToInsert.getPage(i);
+
+            // Solusi aman: Import halaman ke mainPdf
+            PDPage importedPage = mainPdf.importPage(halamanSisip);
+
+            mainPdf.getPages().insertBefore(importedPage, mainPdf.getPage(whereToInsert));
+            whereToInsert++;
+        }
+
+        return fileWantToInsert;
+    }
+
 
 
     public void mergeFilesToMainPdf(List<File> filesWantToMergeWithMainFile, File wheresToSave) throws IOException {
