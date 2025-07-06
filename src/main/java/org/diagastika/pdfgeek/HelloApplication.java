@@ -16,7 +16,7 @@ public class HelloApplication extends Application {
         config.createFolderForApp();
 
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(Constant.HOME_FXML));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 500);
+        Scene scene = new Scene(fxmlLoader.load(), Constant.WIDTH_SCREEN, Constant.HEIGHT_SCREEN);
         stage.setTitle("PDF-Geek");
 
         stage.setResizable(false);
