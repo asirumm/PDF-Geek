@@ -98,7 +98,7 @@
                   <Insets left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
             </Button>
-            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#insertOperationButtonOnClick" text="Tambah halaman">
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#insertOperationButtonOnClick" text="Sisipkan halaman">
                <HBox.margin>
                   <Insets left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
