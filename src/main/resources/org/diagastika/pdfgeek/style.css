@@ -1,0 +1,6 @@
+.text-area-transparent {
+    -fx-background-color: transparent;
+}
+.border{
+    border-style:solid;
+}
