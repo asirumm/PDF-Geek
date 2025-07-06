@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.diagastika.pdfgeek.Controller.MergeController">
+   <children>
+      <VBox layoutX="1.0" layoutY="-1.0" prefHeight="500.0" prefWidth="700.0">
+         <children>
+            <HBox prefHeight="56.0" prefWidth="700.0">
+               <children>
+                  <Label text="File utama : ">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" top="20.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label fx:id="mainPdfNameLabel" text="...">
+                     <HBox.margin>
+                        <Insets left="10.0" top="20.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Label text="List pdf yang akan di gabungkan">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="10.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <ListView fx:id="pdfWantToMergeListView" prefHeight="160.0" prefWidth="700.0" />
+            <HBox prefHeight="48.0" prefWidth="700.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#addFileButtonOnClick" text="Tambah file" />
+                  <Button mnemonicParsing="false" onAction="#deleteFileButtonOnAction" text="Hapus file">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#deleteAllListFileButtonOnClick" text="Hapus semua daftar">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </HBox>
+            <HBox prefHeight="53.0" prefWidth="700.0">
+               <children>
+                  <TextField disable="true" prefHeight="26.0" prefWidth="191.0" promptText="path file " />
+                  <Button mnemonicParsing="false" onAction="#mergeOnAction" text="Gabungkan">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets left="10.0" top="10.0" />
+               </padding>
+            </HBox>
+            <Pane prefHeight="115.0" prefWidth="700.0">
+               <children>
+                  <Label layoutX="14.0" layoutY="4.0" text="Info">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="feedbackLabel" layoutX="11.0" layoutY="24.0" text="...." textFill="#3d88e4" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Button mnemonicParsing="false" onAction="#backButtonOnClick" text="Back to home">
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+   </children>
+</Pane>
