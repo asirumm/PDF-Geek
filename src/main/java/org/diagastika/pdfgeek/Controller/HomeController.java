@@ -34,6 +34,13 @@ public class HomeController extends BaseController {
     @Override
     protected void initialize() {
         super.initialize();
+
+        if (MESSAGE_OPERATION_SUCCESS != null && !MESSAGE_OPERATION_SUCCESS.isEmpty()) {
+            String temp = String.copyValueOf(MESSAGE_OPERATION_SUCCESS.toCharArray());
+            feedbackLabel.setText(temp);
+            MESSAGE_OPERATION_SUCCESS = null;
+        }
+
     }
 
     @FXML
@@ -148,6 +155,40 @@ public class HomeController extends BaseController {
 
     @FXML
     private void insertOperationButtonOnClick(){
+        if (isUserAlreadyChooseMainPdf()){
+            try {
+                // Kode dibawah ini dilakukan untuk passing instance PDF service
+
+                // Membuat instance FXMLLoader, untuk memuat file FXML halaman delete
+                FXMLLoader insertScreenLoader = ScreenHelper.getLoader(INSERT_SCENE_FXML);
+
+                // Melakukan load file FXML, hasilnya berupa root node (Parent)
+                Parent root = insertScreenLoader.load(); // Penting! load() hanya dipanggil sekali
+
+                // Mengambil instance controller dari file FXML yang sudah diload
+                InsertController insertController = insertScreenLoader.getController();
+
+                // initial
+                insertController.create(pdfServices);
+
+                // Membuat Scene baru dengan root node yang sudah diload
+                Scene deleteScene = new Scene(root);
+
+                // Membuat stage baru (window baru) untuk menampilkan scene
+                Stage stage = ScreenHelper.getStageConfig(deleteScene);
+
+                stage.show();
+
+                // Menutup window saat ini
+                getStage().close();
+
+            } catch (IOException e) {
+
+                logger.error("Error loading delete operation scene ", e);
+                Platform.exit();
+            }
+        }
+
     }
 
     @FXML

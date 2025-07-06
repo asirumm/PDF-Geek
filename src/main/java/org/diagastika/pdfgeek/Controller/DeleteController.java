@@ -195,15 +195,17 @@ public class DeleteController extends BaseController {
                 pdfServices.deletingPagesFromMainPdf(listPageToDelete,file);
 
                 StringBuilder text = new StringBuilder();
-                text.append("file ");
+                text.append("operasi delete berhasil, file ");
                 text.append(file.getName());
-                text.append(" berhasil disimpan");
+                text.append(" telah disimpan");
 
-                feedbackLabel.setText(text.toString());
-
-                pathFileSaveTextField.setText(file.getAbsolutePath());
+                Constant.MESSAGE_OPERATION_SUCCESS = text.toString();
 
                 logger.info("sukses operasi hapus halaman");
+
+                pdfServices.closePDDocument();
+
+                ScreenHelper.switchScreen(getStage(),Constant.HOME_FXML);
 
             } catch (IOException e) {
 
@@ -230,6 +232,9 @@ public class DeleteController extends BaseController {
     @FXML
     public void backButtonOnClick(){
         logger.info("back to home");
+
+        pdfServices.closePDDocument();
+
         ScreenHelper.switchScreen(getStage(), Constant.HOME_FXML);
     }
 

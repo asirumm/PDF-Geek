@@ -13,7 +13,10 @@ public class Constant {
     public static final String HOME_FXML = "Main.fxml";
     public static final String DELETE_SCENE_FXML = "DeleteOperationScreen.fxml";
     public static final String MERGE_SCENE_FXML = "MergeOperationScreen.fxml";
+    public static final String INSERT_SCENE_FXML = "InsertOperationScreen.fxml";
     public static final String LOG_FILE = "application.log";
+
+    public static String MESSAGE_OPERATION_SUCCESS;
 
     public static final int WIDTH_SCREEN  = 900;
     public static final int HEIGHT_SCREEN = 720;

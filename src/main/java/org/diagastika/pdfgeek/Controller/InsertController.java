@@ -254,9 +254,18 @@ public class InsertController extends BaseController{
            try {
                pdfServices.insertFilesToMainPdf(listOfFileWantToInsert,file);
 
+               StringBuilder text = new StringBuilder();
+               text.append("operasi insert berhasil, file ");
+               text.append(file.getName());
+               text.append(" telah disimpan");
+
+               Constant.MESSAGE_OPERATION_SUCCESS = text.toString();
+
                logger.info("berhasil melakukan operasi sisipkan halaman");
 
-               feedbackLabel.setText("file berhasil disimpan "+ file.getName());
+               pdfServices.closePDDocument();
+
+               ScreenHelper.switchScreen(getStage(),Constant.HOME_FXML);
 
            }catch (RuntimeException|IOException a){
                logger.error(a.getMessage(),a.getCause());

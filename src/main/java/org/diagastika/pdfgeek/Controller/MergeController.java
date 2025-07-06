@@ -108,13 +108,17 @@ public class MergeController extends BaseController {
                pdfServices.mergeFilesToMainPdf(pdfFilesToMerge,file);
 
                StringBuilder text = new StringBuilder();
-               text.append("file ");
+               text.append("operasi merge berhasil, file ");
                text.append(file.getName());
-               text.append(" berhasil disimpan");
+               text.append(" telah disimpan");
 
-               feedbackLabel.setText(text.toString());
+               Constant.MESSAGE_OPERATION_SUCCESS = text.toString();
 
                logger.info("sukses menggabungkan dokumen nama file baru {}",file.getName());
+
+               pdfServices.closePDDocument();
+
+               ScreenHelper.switchScreen(getStage(),Constant.HOME_FXML);
 
            } catch (IOException e) {
 
@@ -127,8 +131,10 @@ public class MergeController extends BaseController {
     }
 
     @FXML
-    private void backButtonOnClick(){
+    private void backButtonOnClick() throws IOException {
         logger.info("back to home");
+
+        pdfServices.closePDDocument();
 
         ScreenHelper.switchScreen(getStage(), Constant.HOME_FXML);
     }
