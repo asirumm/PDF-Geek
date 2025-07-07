@@ -1,11 +1,10 @@
 package org.diagastika.pdfgeek.Helper;
 
-import com.sun.tools.javac.Main;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.diagastika.pdfgeek.Constant;
 import org.diagastika.pdfgeek.HelloApplication;

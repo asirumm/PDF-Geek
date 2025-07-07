@@ -4,8 +4,8 @@ module org.diagastika.pdfgeek {
     requires javafx.swing;
     requires org.apache.pdfbox;
     requires org.slf4j;
-    requires jdk.compiler;
-    requires jdk.jconsole;
+
+
 
     opens org.diagastika.pdfgeek to javafx.fxml;
     exports org.diagastika.pdfgeek;
