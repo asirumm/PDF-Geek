@@ -10,7 +10,7 @@ Info :
 - pastikan kalian beri akses eksekusi `chmod +x run.sh`
 
 Kenapa bisa sampai 100mb+? Karena sdk javafx sudah tidak dibundle dengan jdk, 
-ini sulit untuk membuat native.
+jadi saya harus taruh sdk (lib) disana.
 
 Fitur : 
 - Hapus halaman pdf
