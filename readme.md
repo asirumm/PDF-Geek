@@ -4,6 +4,7 @@ javafx.
 Download di [drive](https://drive.google.com/file/d/10yW73swKhQ7BukTrrKY4ASzlhMtXxsrt/view?usp=sharing)
 
 Info : 
+- pastikan ada java 21
 - untuk linux menggunakan run.sh dan win run.bat
 - saya belum coba di windows
 - pastikan kalian beri akses eksekusi `chmod +x run.sh`
